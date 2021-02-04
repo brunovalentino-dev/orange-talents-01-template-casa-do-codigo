@@ -1,3 +1,6 @@
-# Por favor faça um Fork desse projeto!
+# Casa do Código API
 
-## Está em dúvida de como fazer um Fork? Não tem problema! [Aqui tem uma explicação do que entendemos que você deve considerar!](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo)
+Projeto #1 - Orange Talents Zup Bootcamp
+
+Projeto de uma API REST utilizando Java + Spring Boot, JPA/Hibernate e banco de dados MySQL para simular operações de cadastro de informações.
+
