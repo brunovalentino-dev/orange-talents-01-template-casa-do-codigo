@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.zup.casadocodigo.controller.request.NovaCategoriaRequest;
+import br.com.zup.casadocodigo.controller.response.NovaCategoriaResponse;
 import br.com.zup.casadocodigo.model.Categoria;
 
 @RestController
@@ -23,11 +24,11 @@ public class CategoriaController {
 	@PostMapping
 	@Transactional
 	public String cadastrarNovaCategoria(@RequestBody @Valid NovaCategoriaRequest request) {
-		Categoria novaCategoria = request.toEntity();
+		Categoria categoria = request.toEntity();
 		
-		entityManager.persist(novaCategoria);
+		entityManager.persist(categoria);
 		
-		return novaCategoria.toString();
+		return new NovaCategoriaResponse(categoria).toString();
 	}
 	
 }

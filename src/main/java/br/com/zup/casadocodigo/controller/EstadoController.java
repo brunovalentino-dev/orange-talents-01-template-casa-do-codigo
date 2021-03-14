@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.zup.casadocodigo.controller.request.NovoEstadoRequest;
+import br.com.zup.casadocodigo.controller.response.NovoEstadoResponse;
 import br.com.zup.casadocodigo.model.Estado;
 
 @RestController
@@ -23,11 +24,11 @@ public class EstadoController {
 	@PostMapping
 	@Transactional
 	public String cadastrarNovoEstado(@RequestBody @Valid NovoEstadoRequest request) {
-		Estado novoEstado = request.toEntity(entityManager);
+		Estado estado = request.toEntity(entityManager);
 		
-		entityManager.persist(novoEstado);
+		entityManager.persist(estado);
 		
-		return novoEstado.toString();
+		return new NovoEstadoResponse(estado).toString();
 	}
 	
 }

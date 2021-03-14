@@ -36,9 +36,9 @@ public class Estado {
 	public Long getId() {
 		return id;
 	}
-
-	public boolean pertenceAoPais(Long paisId) {
-		return this.pais.getId().equals(paisId);
+	
+	public String getNome() {
+		return nome;
 	}
 
 	@Override

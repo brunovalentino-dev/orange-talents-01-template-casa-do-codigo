@@ -1,5 +1,6 @@
 package br.com.zup.casadocodigo.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.zup.casadocodigo.controller.dto.LivroDTO;
 import br.com.zup.casadocodigo.controller.request.NovoLivroRequest;
+import br.com.zup.casadocodigo.controller.response.NovoLivroResponse;
 import br.com.zup.casadocodigo.model.Livro;
 
 @RestController
@@ -30,20 +32,21 @@ public class LivroController {
 	@PostMapping
 	@Transactional
 	public String cadastrarNovoLivro(@RequestBody @Valid NovoLivroRequest request) {
-		Livro novoLivro = request.toEntity(entityManager);
+		Livro livro = request.toEntity(entityManager);
 		
-		entityManager.persist(novoLivro);
+		entityManager.persist(livro);
 		
-		return novoLivro.toString();
+		return new NovoLivroResponse(livro).toString();
 	}
 	
 	@GetMapping
 	public List<LivroDTO> buscarLivros() {
-		String queryString = "SELECT NEW " + LIVRO_DTO + "(l.id, l.titulo) FROM Livro l";
+		String queryString = 
+				"SELECT NEW " + LIVRO_DTO + "(l.id, l.titulo) FROM Livro l ORDER BY l.id ASC";
 		
 		TypedQuery<LivroDTO> query = entityManager.createQuery(queryString, LivroDTO.class);
 
-		List<LivroDTO> livrosEncontrados = query.getResultList();
+		List<LivroDTO> livrosEncontrados = Collections.unmodifiableList(query.getResultList());
 
 		return livrosEncontrados;
 	}

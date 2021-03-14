@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.zup.casadocodigo.controller.request.NovoAutorRequest;
+import br.com.zup.casadocodigo.controller.response.NovoAutorResponse;
 import br.com.zup.casadocodigo.model.Autor;
 
 @RestController
@@ -23,11 +24,11 @@ public class AutorController {
 	@PostMapping
 	@Transactional
 	public String cadastrarNovoAutor(@RequestBody @Valid NovoAutorRequest request) {
-		Autor novoAutor = request.toEntity();
+		Autor autor = request.toEntity();
 		
-		entityManager.persist(novoAutor);
-		
-		return novoAutor.toString();
+		entityManager.persist(autor);
+						
+		return new NovoAutorResponse(autor).toString();
 	}
 	
 }

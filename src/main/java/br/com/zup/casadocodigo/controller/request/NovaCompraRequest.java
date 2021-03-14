@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import br.com.zup.casadocodigo.model.Pais;
-import br.com.zup.casadocodigo.validation.annotation.DocumentoValido;
+import br.com.zup.casadocodigo.validation.annotation.CpfCnpj;
 import br.com.zup.casadocodigo.validation.annotation.RegistroExistente;
 
 public class NovaCompraRequest {
@@ -23,7 +23,7 @@ public class NovaCompraRequest {
 	private String email;
 	
 	@NotBlank
-	@DocumentoValido
+	@CpfCnpj
 	private String documento;	
 	
 	@NotBlank
